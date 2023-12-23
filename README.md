@@ -1,130 +1,182 @@
 # Assignment_2_Set_2
 Assignment_2_Set_2
-# Topics: Descriptive Statistics and Probability
+# Topics: Normal distribution, Functions of Random Variables
 
+# 1.The time required for servicing transmissions is normally distributed with  = 45 minutes and  = 8 minutes. The service manager plans to have work begin on the transmission of a customer’s car 10 minutes after the car is dropped off and the customer is told that the car will be ready within 1 hour from drop-off. What is the probability that the service manager cannot meet his commitment? 
 
-# 1.Look at the data given below. Plot the data, find the outliers and find out  
+A.0.3875   
+B.0.2676   
+C.0.5   
+D.0.6987 
 
-Name of company	Measure X
-Allied Signal	24.23%
-Bankers Trust	25.53%
-General Mills	25.41%
-ITT Industries	24.14%
-J.P.Morgan & Co.	29.62%
-Lehman Brothers	28.25%
-Marriott	25.81%
-MCI	24.39%
-Merrill Lynch	40.26%
-Microsoft	32.95%
-Morgan Stanley	91.36%
-Sun Microsystems	25.99%
-Travelers	39.42%
-US Airways	26.71%
-Warner-Lambert	35.00%
+Ans: 
+Given:  = 45,  = 8  
+P = probability that service manager can meet his commitment.
+q = probability that service manager cannot meet his commitment
 
+Car is dropped for 1 hr and work starts after 10 min. Thus time for  successful delivery of commitment is 60 -10 = 50min. Delivery after this time means they cannot meet the commitment 
+So,      q = P(x>=50)
+	=P((x - )/   >=  (50 - 45)/8)
+	=P( Z >=  0.625 )
+	=1 - P( Z <=  0.625 )      {as Z table and python gives less than type probability (<=) I.e left 
+			            Hand side probability. So we convert >= into <= }
 
-Solution:
+{python code : import scipy.stats as st   
+st.norm.cdf(0.625) =   0.7340144709512995 }
 
-Outliers :91.36%
-Mean= 32.83 %
-Variance()=284.25%
-Standard Deviation ()=16.86%
-
+	=1 - 0.7340144709512995 
+	=0.26598552904870054
+So option B is correct answer.
 
 
 
+# 2.The current age (in years) of 400 clerical employees at an insurance claims processing center is normally distributed with mean  = 38 and Standard deviation  =6. For each statement below, please specify True/False. If false, briefly explain why.
+
+A.More employees at the processing center are older than 44 than between 38 and 44.
+B.A training program for employees under the age of 30 at the center would be expected to attract about 36 employees.
+
+Ans: 
+ = 38   =6.
+Let x be the age of Employee.
+P(X=x) =  probability of age
+A: More employees at the processing center are older than 44 than between 38 and 44.
+   Probability of employee that is  older than 44 = P(x >= 44)
+	=P((x - )/   >=  (44- 38)/6)
+	=P( Z >= 1 )
+	=1 - P( Z <= 1 )
+	=0.15865525393145707
+So ,   P(x >= 44) = 0.15865525393145707
+Probability of employee that is  older than 44 is 0.15865525393145707 or 15.87%
+
+Probability of employee is  between 38 and 44. =P( 38 <= x <= 44)
+	=P( 38 <= x <= 44)
+	= P( x <=  44 )  -  P( x  <=  38  )
+	=P(z <=  (44- 38)/6 )   -  P(z <=  (38- 38)/6 )
+	=P( Z <= 1 ) -  P( Z <= 0) 
+	=0.8413447460685429   - 0.5
+	{python code 
+st.norm.cdf(1)-st.norm.cdf(0) = 0.3413447460685429}
+	=0.3413447460685429
+So,  P( 38 <= x <= 44) =0.3413447460685429
+Probability of employee is  between 38 and 44 is 0.3413447460685429 or 34.13%.
+
+ As  P(x >= 44) < P( 38 <= x <= 44)
+Which suggests that, the statement “More employees at the processing center are older than 44 than between 38 and 44.” Is false.
+
+B : A training program for employees under the age of 30 at the center would be expected to attract about 36 employees.
+
+Probability that  A training program for employees under the age of 30 is  P(x<=30).
+P(x<=30)=P( Z <= (30- 38)/6 )
+	 =P( Z <= (30- 38)/6 )
+	 =P( Z <= -1.33 )
+	=st.norm.cdf(-1.33)
+	=0.09175913565028077 
+So, P(x<=30) =0.09175913565028077  I.e. 9.17 %
+To find total no of employee under 30 ,
+We know n = 400
+So, total no of employee under 30 
+=0.09175913565028077 *400
+=36.70365426011231
+
+So employees under 30 are approximatly 36  .
+The statement “A training program for employees under the age of 30 at the center would be expected to attract about 36 employees.” is True.
 
 
+# 3.If X1 ~ N(μ, σ2) and X2 ~ N(μ, σ2) are iid normal random variables, then what is the difference between 2 X1 and X1 + X2? Discuss both their distributions and parameters.   
 
+Ans: 
+Given:
+ If  X1 ~ N(μ, σ2) and X2 ~ N(μ, σ2)   and both are independently and identically  distributed.
+Here parameters=> mean =2μ , variance =2^2*σ2 = 4σ2 
+then 2 X1  ~  N(2μ, 4σ2)  ,
+and  
+For  X1 + X2 ,  parameters=> mean =μ + μ =2μ, variance =2^2*σ2 = σ2 +σ2  =2σ2
+Then X1 + X2 ~ N(2μ , 2σ2)
 
+# 4.Let X ~ N(100, 202). Find two values, a and b, symmetric about the mean, such that the probability of the random variable taking a value between them is 0.99. 
 
+A.90.5, 105.9 
+B.80.2, 119.8 
+C.22, 78 
+D.48.5, 151.5 
+E.90.1, 109.9
 
+Ans: 
+Given: 
+X ~ N(100, 202)  
+μ= 100
+σ2= 20
+P= P(a<= x <=b)= 0.99
+Q = 1  -  P =0.01    =>this will be the complimentary of our desired area(area at the 2 tails) 
+Q/2 =0.005            => 1 tail 
 
+Lets find Z score for 0.005 probability from python table.
+Z score = -2.575 
 
-
-
-
-
-
-
-# 2.Answer the following three questions based on the box-plot above.
-
-(i)What is the inter-quartile range of this dataset? (please approximate the numbers) In one line, explain what this value implies.
-
-Ans : IQR =7 approx . This suggests that 50% of the data lies in the 5 to 12 range.
-
-(ii)What can we say about the skewness of this dataset?
-
-Ans: Distribution is positively skewed. 
-
-(iii)If it was found that the data point with the value 25 is actually 2.5, how would the new  box-plot be affected?
-Ans: Boxplot would have remained same but the outlier value 25 at the right side of the box plot
-Won’t be there in the figure. 
-
-# 3.Answer the following three questions based on the histogram above.
-
-(i)Where would the mode of this dataset lie?
-
-Ans : The mode of the dataset is between 5 to 10.
-
-(ii)Comment on the skewness of the dataset.
-
-Ans : Distribution is positively Skewed.	
-
-(iii)Suppose that the above histogram and the box-plot in question 2 are plotted for the same dataset. Explain how these graphs complement each other in providing information about any dataset. 
-
-Ans : Above Boxplot provides us information if there is any outlier in the dataset.
- Whereas the histogram tells about the clear shape of data, gives us more information about the frequency distribution of the data. Additional info of mode can be obtained from the histogram. For median we have to rely on boxplot as Q2 gives us the value of the median. Also histogram clearly shows us the data is positively skewed and there is a break in the histogram affirming the presence 
-Of an outlier.
-
-
-# 4.AT&T was running commercials in 1990 aimed at luring back customers who had switched to one of the other long-distance phone service providers. One such commercial shows a businessman trying to reach Phoenix and mistakenly getting Fiji, where a half-naked native on a beach responds incomprehensibly in Polynesian. When asked about this advertisement, AT&T admitted that the portrayed incident did not actually take place but added that this was an enactment of something that “could happen.” Suppose that one in 200 long-distance telephone calls is misdirected. What is the probability that at least one in five attempted telephone calls reaches the wrong number? (Assume independence of attempts.)
-
-Ans: GIven Question gives us the following information=
-
-one in 200 long-distance telephone calls is misdirected. Letmisdirected calls be ‘x’
-Therefore, probality of such call P= 1/200
- We have to find atleast 1 in 5 calls are miss directed.
-So,
-Q = P(x=0)= No misdirected call. =1 -(1/200)  =199/200 = 0.995
-P =  P(x=1)= 1 misdirected call. =1/200 
-n =5
-If there are no misdirected calls in 5 attempt. 
-Then P(x=0) = (199/200)^5
-
-So,Atleast one in five attempted telephone calls reaches the wrong numbers
-=1 - P(x=0)
-=1 - (199/200)^5
-=0.0247
+To find a, b from both side, we have formula  z = (x  -  μ)/σ  ,here x = a,b
+ (As we know, a positive Z-score indicates that the value is above the mean(right hand side of mean ), while a negative Z-score indicates that the value is below the mean.(left hand side of mean ))
 
 Thus,
-the probability that at least one in five attempted telephone calls reaches the wrong number = 0.0247 or 0.025.
+a = μ + (Z * σ) = 100 + (-2.575 * 20) = 48.5
+b = μ - (Z * σ) = 100 -  (-2.575 * 20) = 151.5
+
+a, b = (48.5 , 151.5)  option D.
+
+# 5.Consider a company that has two different divisions. The annual profits from the two divisions are independent and have distributions Profit1 ~ N(5, 32) and Profit2 ~ N(7, 42) respectively. Both the profits are in $ Million. Answer the following questions about the total profit of the company in Rupees. Assume that $1 = Rs. 45
+
+A.Specify a Rupee range (centered on the mean) such that it contains 95% probability for the annual profit of the company.
+B.Specify the 5th percentile of profit (in Rupees) for the company
+C.Which of the two divisions has a larger probability of making a loss in a given year? 
+
+Ans: 
+Given:
+
+Profit1 ~ N(5, 32)    Profit2 ~ N(7, 42) 
+
+A.Specify a Rupee range (centered on the mean) such that it contains 95% probability for the annual profit of the company.
+To find the combine distribution 
+
+MEAN = Mean1+ Mean2 = 5+7 =12*45(in rupees) = 540
+STD DEV = sqrt(VARIANCE)= sqrt(32  +  42) =5* 45 = 225
+
+95% probability which is just 95%  confidence interval and we know the critical values for this 
+{Python program = 
+st.norm.interval(0.95 ,540, 225) = (99.00810347848784, 980.9918965215122)}
+
+Therefore,
+Range is Rs (99.00810347848784, 980.9918965215122) in Millions
 
 
-# 5. Returns on a certain business venture, to the nearest $1,000, are known to follow the following probability distribution
-x	P(x)
--2,000	0.1
--1,000	0.1
-0	0.2
-1000	0.2
-2000	0.3
-3000	0.1
+B.Specify the 5th percentile of profit (in Rupees) for the company
 
-(i)What is the most likely monetary outcome of the business venture?
+The 5th percentile corresponds to 1.65 standard deviations below the mean
+So Z =  1.645
+X =MEAN - (Z*STD DEV)
+  =540 - 1.645 *225)
+ X = 170.0 Millions
 
-Ans: It suggests that there is 60% chance is business will make positive returns. The highest probability is 0.3 that the business will make  $2000 implies business has good chance to make 
-High returns.
 
-(ii)Is the venture likely to be successful? Explain
 
-Ans: Yes Because there is 60% chance that the venture will give a positive return.And only 20% chance of loss.
 
-(iii)What is the long-term average earning of business ventures of this kind? Explain
 
-Ans : Average = (-2000*0.1) +(-1000*0.1) +(0*0.2) +(1000*0.2) +(2000 *0.3) +(3000*0.1) =800
-So, the long-term average earning for these types of ventures would be around $800.
 
-(iv)What is the good measure of the risk involved in a venture of this kind? Compute this measure
 
-Ans: The risk involved in this venture would be the total probability of negative returns 
-Which is 0.1+0.1=0.2. So 20% chance of risk in a given venture.
+.C .Which of the two divisions has a larger probability of making a loss in a given year? 
+ 
+Profit1 ~ N(5, 32)    Profit2 ~ N(7, 42) 
+
+For Profit1:
+Probability of making a loss for Profit1 = P(Profit1 < 0) = CDF(0, 5, 3)  [=cdf(0, mean , sd)]
+
+{stats.norm.cdf(0,5,3)}
+=0.040059156863817086
+=4%
+
+For Profit2:
+Probability of making a loss for Profit2 = P(Profit2 < 0) = CDF(0, 7, 4)
+
+{stats.norm.cdf(0,7,4)}
+=0.0477903522728147
+=4.7%
+
+Thus , second division has larger probability of loss which is 4.7%.
